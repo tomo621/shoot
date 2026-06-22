@@ -1,29 +1,27 @@
-using UnityEngine;
+ï»¿using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public float speed = 10f; 
+    public float speed = 10f;
 
     void Start()
     {
-        // Œ‚‚½‚ê‚Ä‚©‚ç3•bŒã‚É©“®‚ÅÁ–Å
         Destroy(gameObject, 3f);
     }
 
     void Update()
     {
-        // ã‚ÉŒü‚©‚Á‚ÄˆÚ“®
         transform.Translate(Vector3.up * speed * Time.deltaTime);
     }
 
-    // ‘¼‚ÌƒIƒuƒWƒFƒNƒg‚Æ‚Ô‚Â‚©‚Á‚½‚Ìˆ—
     void OnTriggerEnter2D(Collider2D other)
     {
-        
         if (other.CompareTag("Enemy"))
         {
-            Destroy(other.gameObject); 
-            Destroy(gameObject); 
+            if (GameManager.instance != null) GameManager.instance.AddScore(100);
+
+            Destroy(other.gameObject);
+            Destroy(gameObject);
         }
     }
 }
